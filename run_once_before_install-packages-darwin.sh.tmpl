@@ -1,0 +1,121 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+#!/bin/bash -x
+
+PACKAGES=(
+   node
+   dash
+   gh
+   go
+   hugo
+   mas
+   shellcheck
+   the_silver_searcher
+   starship
+   neovim
+   exa
+   tre-command
+   bat
+   git-delta
+)
+
+CASKS=(
+    1password
+    1password-cli
+    cakebrew
+    dropbox
+    font-fira-code
+    font-hack-nerd-font
+    google-drive
+    hyper
+    iina
+    iterm2
+    qlcolorcode
+    qlimagesize
+    qlmarkdown
+    qlprettypatch
+    qlstephen
+    quicklook-csv
+    quicklook-json
+    spotify
+    steam
+    syncthing
+    visual-studio-code
+)
+
+MASPACKAGES=(
+    824171161 # "Affinity Designer"
+    824183456 # "Affinity Photo"
+    411643860 # "DaisyDisk"
+    486626129 # "Folder Tidy"
+    682658836 # "GarageBand"
+    1099568401 # "Home Assistant"
+    408981434 # "iMovie"
+    498944723 # "JPEGmini"
+    409183694 # "Keynote"
+    405399194 # "Kindle"
+    441258766 # "Magnet"
+    409203825 # "Numbers"
+    409201541 # "Pages"
+    445189367 # "PopClip"
+    413965349 # "Soulver 2"
+    1062679359 # "Typeface"
+)
+
+GOAPPS=(
+    github.com/Crosse/font-install
+)
+
+# If Homebrew is not installed on the system, it will be installed here
+if test ! $(which brew); then
+   printf '\n\n\e[33mHomebrew not found. \e[0mInstalling Homebrew...'
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+else
+  printf '\n\n\e[0mHomebrew found. Continuing...'
+fi
+
+# Update homebrew packages
+printf '\nInitiating Homebrew update...\n'
+brew update
+
+printf '\nInstalling packages...\n'
+brew install ${PACKAGES[@]}
+
+printf '\n\nRemoving out of date packages...\n'
+brew cleanup
+
+printf '\n\nInstalling cask...\n'
+brew install cask
+
+printf '\n\nInstalling cask apps...\n'
+brew install --cask ${CASKS[@]}
+
+printf '\nInstalling MacAppStore apps...\n'
+for app in ${MASPACKAGES[@]}; do
+    mas install ${app}
+done
+
+printf '\n\nInstalling go programs...\n'
+for app in "${GOAPPS[@]}"; do
+    go install "${app}@latest"
+done
+
+printf '\n\nUpdating npm...\n'
+npm install -g npm
+
+printf '\n\nInstalling global npm packages...\n'
+npm install -g sass
+
+printf '\n\nSetting Global Mac Settings...\n'
+# better key repeat
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 1
+# no delay for dock hiding
+defaults write com.apple.dock autohide-delay -float 0
+dscacheutil -flushcache
+
+printf '\n\nSetup autocomplete...\n'
+sudo mkdir -p /usr/local/share/zsh/site-functions/
+sudo chown -R $(whoami) /usr/local/share/zsh/site-functions/
+hugo completion zsh > /usr/local/share/zsh/site-functions/_hugo
+
+{{ end -}}
