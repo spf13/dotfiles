@@ -1,0 +1,37 @@
+# Awesome Zsh Plugins: https://github.com/unixorn/awesome-zsh-plugins
+# Antigen: https://github.com/zsh-users/antigen
+# Oh My Zsh: https://github.com/ohmyzsh/ohmyzsh
+
+MAGIC_ENTER_GIT_COMMAND='git status -u .'
+MAGIC_ENTER_OTHER_COMMAND='k -ah'
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle autojump
+antigen bundle colorize
+antigen bundle command-not-found
+antigen bundle docker
+antigen bundle git
+antigen bundle golang
+antigen bundle magic-enter
+antigen bundle safe-paste
+
+# Additional bundles
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+
+antigen bundle jeffreytse/zsh-vi-mode
+antigen bundle ael-code/zsh-colored-man-pages
+antigen bundle kennethreitz/autoenv
+antigen bundle b4b4r07/enhancd
+antigen bundle supercrabtree/k
+
+# Load the theme.
+# antigen theme romkatv/powerlevel10k
+
+# Tell Antigen that you're done.
+antigen apply

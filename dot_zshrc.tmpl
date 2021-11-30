@@ -1,0 +1,68 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Steve Francia <steve.francia@gmail.com>
+
+## CONFIGURATIONS
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true" 
+
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+SAVEHIST=5000
+HISTSIZE=2000
+
+## OPTIONS
+setopt NO_CASE_GLOB       # Globbing and tab-completion to be case-insensitive.
+setopt GLOB_COMPLETE
+setopt AUTO_CD            # Enable changing to directories without typing cd first.
+
+setopt CORRECT            # enable command auto-correction
+setopt CORRECT_ALL
+
+# HISTORY
+setopt EXTENDED_HISTORY   # enable more detailed history (time, command, etc.)   
+setopt SHARE_HISTORY      # share history across multiple zsh sessions
+setopt APPEND_HISTORY     # append to history
+setopt INC_APPEND_HISTORY # adds commands as they are typed, not at shell exit
+setopt HIST_VERIFY        # let you edit !$, !! and !* before executing the command
+setopt HIST_IGNORE_DUPS   # do not store duplications
+setopt HIST_REDUCE_BLANKS # removes blank lines from history
+
+eval "$(starship init zsh)"
+
+if [ -f ${HOME}/.aliases ]; then
+        . ${HOME}/.aliases
+fi
+
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+# default to file completion
+zstyle ':completion:*' completer _expand _complete _files _correct _approximate
+
+source ~/.antigen.zsh
+antigen init ~/.antigenrc
+
+{{ if eq .chezmoi.os "darwin" -}}
+# macOS .zshrc contents
+  if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+  fi
+
+{{ else if eq .chezmoi.os "linux" -}}
+# Linux .zshrc contents
+
+{{ else if eq .chezmoi.os "windows" -}}
+# Windows .zshrc contents
+{{ end -}} 
