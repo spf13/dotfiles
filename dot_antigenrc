@@ -9,7 +9,6 @@ MAGIC_ENTER_OTHER_COMMAND='k -ah'
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle autojump
 antigen bundle colorize
 antigen bundle command-not-found
 antigen bundle docker
@@ -28,7 +27,7 @@ antigen bundle jeffreytse/zsh-vi-mode
 antigen bundle ael-code/zsh-colored-man-pages
 antigen bundle kennethreitz/autoenv
 antigen bundle b4b4r07/enhancd
-antigen bundle supercrabtree/k
+# antigen bundle supercrabtree/k
 
 # Load the theme.
 # antigen theme romkatv/powerlevel10k

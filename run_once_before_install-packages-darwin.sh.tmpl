@@ -16,6 +16,8 @@ PACKAGES=(
    tre-command
    bat
    git-delta
+   fzf
+   zoxide
 )
 
 CASKS=(
@@ -117,5 +119,8 @@ printf '\n\nSetup autocomplete...\n'
 sudo mkdir -p /usr/local/share/zsh/site-functions/
 sudo chown -R $(whoami) /usr/local/share/zsh/site-functions/
 hugo completion zsh > /usr/local/share/zsh/site-functions/_hugo
+
+printf '\n\nSetting up antigen...\n'
+curl -L git.io/antigen > ${HOME}/.antigen.zsh
 
 {{ end -}}

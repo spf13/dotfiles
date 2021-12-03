@@ -35,6 +35,7 @@ setopt HIST_IGNORE_DUPS   # do not store duplications
 setopt HIST_REDUCE_BLANKS # removes blank lines from history
 
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 if [ -f ${HOME}/.aliases ]; then
         . ${HOME}/.aliases

@@ -1,6 +1,7 @@
 # MODERN APPLICATIONS
     exa_params=('--git' '--icons' '--classify' '--group-directories-first' '--time-style=long-iso' '--group' '--color-scale')
 
+{{- if ne .chezmoi.os "windows" }}
     alias ls='exa ${exa_params}'
     alias l='exa --git-ignore ${exa_params}'
     alias ll='exa --all --header --long ${exa_params}'
@@ -9,20 +10,18 @@
     alias lx='exa -lbhHigUmuSa@'
     alias lt='exa --tree'
     alias tree='exa --tree'
+{{- end }}
 
-    # alias ls='exa --color=auto -F'
-    # alias l='exa'
-    # alias la='exa -a'
-    # alias ll='exa -lah'
-    # alias tree='tre'
+{{- if eq .chezmoi.os "windows" }}
+    alias ls='ls -h --color=auto'
+    alias l='ls -l'
+    alias la='ls -a'
+    alias ll='ls -la'
+{{- end }}
+
     alias cat='bat --paging=never'
     alias less='bat'
     alias more='bat'
-
-# BETTER DEFAULTS
-
-    # default to print raw characters
-    alias less='less -R'
 
 # CONVENIENCE
 
