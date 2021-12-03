@@ -1,3 +1,9 @@
+#
+# This file is managed by chezmoi. Always edit it with the command
+# chezmoi edit $profile
+# chezmoi diff
+# chezmoi -v apply
+
 $ENV:STARSHIP_CONFIG = "$HOME\config\starship\config.toml"
 
 if (Get-Command starship -errorAction SilentlyContinue) {
