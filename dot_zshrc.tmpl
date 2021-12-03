@@ -1,4 +1,11 @@
 #
+# This file is managed by chezmoi. Always edit it with the command
+# chezmoi edit ~/.zshrc
+# chezmoi diff
+# chezmoi -v apply
+#
+
+#
 # Executes commands at the start of an interactive session.
 #
 # Authors:
@@ -35,7 +42,6 @@ setopt HIST_IGNORE_DUPS   # do not store duplications
 setopt HIST_REDUCE_BLANKS # removes blank lines from history
 
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
 
 if [ -f ${HOME}/.aliases ]; then
         . ${HOME}/.aliases
@@ -60,6 +66,8 @@ antigen init ~/.antigenrc
     autoload -Uz compinit
     compinit
   fi
+  
+  eval "$(zoxide init zsh)"
 
 {{ else if eq .chezmoi.os "linux" -}}
 # Linux .zshrc contents

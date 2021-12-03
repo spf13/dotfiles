@@ -1,3 +1,10 @@
+#
+# This file is managed by chezmoi. Always edit it with the command
+# chezmoi edit ~/.zshrc
+# chezmoi diff
+# chezmoi -v apply
+#
+
 # Awesome Zsh Plugins: https://github.com/unixorn/awesome-zsh-plugins
 # Antigen: https://github.com/zsh-users/antigen
 # Oh My Zsh: https://github.com/ohmyzsh/ohmyzsh
