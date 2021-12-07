@@ -74,4 +74,7 @@ antigen init ~/.antigenrc
 
 {{ else if eq .chezmoi.os "windows" -}}
 # Windows .zshrc contents
+
+  eval "$(zoxide init zsh | dos2unix)"
+
 {{ end -}} 
