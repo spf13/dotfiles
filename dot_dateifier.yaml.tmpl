@@ -1,0 +1,14 @@
+#
+# This file is managed by chezmoi. Always edit it with the command
+# chezmoi edit ~/.dateifier.yaml
+# chezmoi diff
+# chezmoi -v apply
+#
+
+{{- if eq .chezmoi.os "windows" }}
+media_repo: P:\
+{{- end }}
+
+{{ if eq .chezmoi.os "darwin" -}}
+media_repo: /Volumes/Photo/
+{{- end }}
